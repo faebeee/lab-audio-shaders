@@ -48552,7 +48552,6 @@
       positions.push(geometry.vertices[i].x, geometry.vertices[i].y, geometry.vertices[i].z);
     }
 
-    console.log(positions);
     var planet = new Mesh(geometry, material);
     planet.userData.originalVertices = positions;
     planet.castShadow = true;

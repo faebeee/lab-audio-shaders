@@ -78,7 +78,6 @@ function createPlanet(x, z) {
         geometry.vertices[i].z += Math.random() * VERT_NOISE;
         positions.push(geometry.vertices[i].x, geometry.vertices[i].y, geometry.vertices[i].z);
     }
-    console.log(positions);
     const planet = new THREE.Mesh(geometry, material);
     planet.userData.originalVertices = positions;
     planet.castShadow = true;
