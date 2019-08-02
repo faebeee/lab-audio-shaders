@@ -43,7 +43,9 @@ Lab.update = () => {
         counter += 3;
     }
     geometry.verticesNeedUpdate = true;
+    planet.rotation.x += 0.001;
     planet.rotation.y += 0.001;
+    planet.rotation.z += 0.001;
 };
 
 function clamp(number, min, max) {
@@ -51,25 +53,25 @@ function clamp(number, min, max) {
 }
 
 function createLights() {
-    let light = new THREE.PointLight('#fffff0', 1, 150);
+    let light = new THREE.PointLight('#fffff0', 1, 200);
     light.castShadow = true;
     light.position.set(-50, 100, 50);
     Lab.scene.add(light);
 
-    let light2 = new THREE.PointLight('#fffff0', 1, 150);
+    let light2 = new THREE.PointLight('#fffff0', 1, 200);
     light2.castShadow = true;
     light2.position.set(50, 100, 50);
     Lab.scene.add(light2);
 
-    let light3 = new THREE.PointLight('#ff0000', 1, 150);
+    let light3 = new THREE.PointLight('#ff0000', 5, 100);
     light3.castShadow = true;
     light3.position.set(0, -50, 50);
     Lab.scene.add(light3);
 }
 
-function createPlanet(x, z) {
+function createPlanet() {
     const geometry = new THREE.SphereGeometry(15, 32, 32);
-    const material = new THREE.MeshPhongMaterial({ color: '#51a9ff', flatShading: true });
+    const material = new THREE.MeshStandardMaterial({ color: '#51a9ff', wireframe: true});
 
     const positions = [];
     for (let i = 0; i < geometry.vertices.length; i++) {
@@ -80,8 +82,6 @@ function createPlanet(x, z) {
     }
     const planet = new THREE.Mesh(geometry, material);
     planet.userData.originalVertices = positions;
-    planet.castShadow = true;
-    planet.receiveShadow = true;
     return planet;
 }
 

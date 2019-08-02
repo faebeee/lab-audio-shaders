@@ -48515,7 +48515,9 @@
     }
 
     geometry.verticesNeedUpdate = true;
+    planet.rotation.x += 0.001;
     planet.rotation.y += 0.001;
+    planet.rotation.z += 0.001;
   };
 
   function clamp(number, min, max) {
@@ -48523,25 +48525,25 @@
   }
 
   function createLights() {
-    var light = new PointLight('#fffff0', 1, 150);
+    var light = new PointLight('#fffff0', 1, 200);
     light.castShadow = true;
     light.position.set(-50, 100, 50);
     Lab.scene.add(light);
-    var light2 = new PointLight('#fffff0', 1, 150);
+    var light2 = new PointLight('#fffff0', 1, 200);
     light2.castShadow = true;
     light2.position.set(50, 100, 50);
     Lab.scene.add(light2);
-    var light3 = new PointLight('#ff0000', 1, 150);
+    var light3 = new PointLight('#ff0000', 5, 100);
     light3.castShadow = true;
     light3.position.set(0, -50, 50);
     Lab.scene.add(light3);
   }
 
-  function createPlanet(x, z) {
+  function createPlanet() {
     var geometry = new SphereGeometry(15, 32, 32);
-    var material = new MeshPhongMaterial({
+    var material = new MeshStandardMaterial({
       color: '#51a9ff',
-      flatShading: true
+      wireframe: true
     });
     var positions = [];
 
@@ -48554,8 +48556,6 @@
 
     var planet = new Mesh(geometry, material);
     planet.userData.originalVertices = positions;
-    planet.castShadow = true;
-    planet.receiveShadow = true;
     return planet;
   }
 
